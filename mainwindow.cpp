@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    if (db.open()) {
+        qDebug() << "db open";
+    }
 }
 
 MainWindow::~MainWindow()
