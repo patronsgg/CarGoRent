@@ -13,9 +13,130 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QWidget" name="rentPage">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>80</y>
+          <width>281</width>
+          <height>301</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Доступные для аренды</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="historyPage">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTableWidget" name="tableWidget">
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>date_start</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>date_finish</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>bill_status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>bill_total</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>billing_time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Discount_size</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>trademark</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>tenant</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>color</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Аренда</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>История поездок</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

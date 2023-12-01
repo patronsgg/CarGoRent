@@ -5,14 +5,12 @@
 #include <QSqlDatabase>
 #include <QDebug>
 
-login::login(QWidget *parent) :
+login::login(QSqlDatabase db, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::login)
 {
     ui->setupUi(this);
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("./rent.db");
-    db.open();
+    this->db = db;
 }
 
 login::~login()
@@ -26,11 +24,11 @@ void login::on_loginButton_clicked()
     qry.prepare("SELECT COUNT(*) FROM user WHERE (user_email = :login OR user_telephone = :login) AND password = :pass");
     qry.bindValue(":login", ui->loginEdit->text());
     qry.bindValue(":pass", ui->passwordEdit->text());
-    qry.next();
+    qry.exec();
+    qry.first();
     qDebug() << qry.value(0).toInt();
     if (qry.value(0).toInt() == 1) {
-        MainWindow w;
-        w.setWindowTitle(tr("CarGoRent"));
+        email = ui->loginEdit->text();
         accept();
     }
 }
