@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>418</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,22 +33,89 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <widget class="QWidget" name="rentPage">
-       <widget class="QGroupBox" name="groupBox">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>80</y>
-          <width>281</width>
-          <height>301</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Доступные для аренды</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Доступные для аренды</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QComboBox" name="comboBox"/>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tableWidget_2">
+               <row>
+                <property name="text">
+                 <string>Номер т/с</string>
+                </property>
+               </row>
+               <row>
+                <property name="text">
+                 <string>Марка</string>
+                </property>
+               </row>
+               <row>
+                <property name="text">
+                 <string>Цвета</string>
+                </property>
+               </row>
+               <row>
+                <property name="text">
+                 <string>Топливо</string>
+                </property>
+               </row>
+               <row>
+                <property name="text">
+                 <string>Стоимость за минуту</string>
+                </property>
+               </row>
+               <row>
+                <property name="text">
+                 <string>Кол-во поломок</string>
+                </property>
+               </row>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="text">
+                <string>Арендовать</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="historyPage">
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="placeholderText">
+             <string>цвет</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="placeholderText">
+             <string>марка</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+         </layout>
+        </item>
         <item>
          <widget class="QTableWidget" name="tableWidget">
           <column>
@@ -104,6 +171,21 @@
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="page">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>320</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Окончить аренду</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
