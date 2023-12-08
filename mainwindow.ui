@@ -80,6 +80,13 @@
               </widget>
              </item>
              <item>
+              <widget class="QLineEdit" name="lineEdit_4">
+               <property name="placeholderText">
+                <string>промокод</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="pushButton_3">
                <property name="text">
                 <string>Арендовать</string>
@@ -111,61 +118,58 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_3"/>
-          </item>
          </layout>
         </item>
         <item>
          <widget class="QTableWidget" name="tableWidget">
           <column>
            <property name="text">
-            <string>id</string>
+            <string>Номер оплаты</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>date_start</string>
+            <string>Дата начала</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>date_finish</string>
+            <string>Дата окончания</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>bill_status</string>
+            <string>Статус платежа</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>bill_total</string>
+            <string>Итого</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>billing_time</string>
+            <string>Время оплаты</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Discount_size</string>
+            <string>Размер скидки</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>trademark</string>
+            <string>Марка</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>tenant</string>
+            <string>Арендатель</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>color</string>
+            <string>Цвет</string>
            </property>
           </column>
          </widget>
@@ -173,19 +177,43 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page">
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>320</y>
-          <width>191</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Окончить аренду</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTableWidget" name="tableWidget_3">
+            <column>
+             <property name="text">
+              <string>Марка</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Цвет</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Стоимость</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Время аренды</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>Окончить аренду</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -215,7 +243,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

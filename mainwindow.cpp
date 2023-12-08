@@ -14,15 +14,17 @@ MainWindow::MainWindow(QWidget *parent)
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("./rent.db");
     db.open();
+    this->setWindowTitle("CargoRent");
 
-    /*
+
     login loginwindow(db);
+    loginwindow.setWindowTitle("CargoRent");
     switch (loginwindow.exec()) {
     case QDialog::Rejected:
         QTimer::singleShot(0, this, SLOT(close()));
         break;
-    } */
-    email = "lilpush@ya.ru"; // loginwindow.returnEmail();
+    }
+    email = loginwindow.returnEmail();
 
     on_pushButton_clicked();
 }
@@ -49,6 +51,8 @@ void MainWindow::on_pushButton_clicked()
        reloadComboBox();
     } else {
         ui->stackedWidget->setCurrentIndex(2);
+
+        reloadTable();
     }
 }
 
@@ -138,7 +142,7 @@ void MainWindow::reloadInfo()
         ui->tableWidget->setRowCount(qry.value(0).toInt());
 
         qry.prepare("SELECT history.idHistory, history.date_start, history.date_finish, bill.bill_status, bill.bill_total, "
-                    "bill.billing_time, discount.discount_size, trademark.trademark_name, tenant.tenant_name, color.color_name "
+                    "bill.billing_time, discount.discount_size, trademark.trademark_name, tenant.tenant_name, color.color_name, bill.idBill "
                     " FROM history INNER JOIN bill ON history.idBill = bill.idBill "
                     "INNER JOIN discount ON bill.idDiscount = discount.idDiscount "
                     "INNER JOIN vehicle ON vehicle.idVehicle = bill.idVehicle "
@@ -228,19 +232,30 @@ void MainWindow::on_pushButton_3_clicked()
     qry.exec();
     qry.first();
     int idTemp = qry.value(0).toInt();
+
+    qry.prepare("SELECT idDiscount FROM discount WHERE code_name = :name");
+    qry.bindValue(":name", ui->lineEdit_4->text());
+    qry.exec();
+    qry.first();
+    int idCode = qry.value(0).toInt();
+    if (idCode == 0) {
+        idCode = 3;
+    }
     if (idTemp != 0) {
-        qry.prepare("INSERT INTO bill (bill_status, idUser, idDiscount, idVehicle) VALUES (1, (SELECT idUser FROM user WHERE user_email = :email), 3, :id)");
+        qry.prepare("INSERT INTO bill (bill_status, idUser, idDiscount, idVehicle) VALUES (0, (SELECT idUser FROM user WHERE user_email = :email), :idCode, :id)");
         qry.bindValue(":email", email);
         qry.bindValue(":id", idTemp);
-        qDebug() << "asd";
+        qry.bindValue(":idCode", idCode);
     } else {
-        qry.prepare("INSERT INTO bill (bill_status, idUser, idDiscount, idVehicle) VALUES (0, (SELECT idUser FROM user WHERE user_email = :email), 3,"
+        qry.prepare("INSERT INTO bill (bill_status, idUser, idDiscount, idVehicle) VALUES (0, (SELECT idUser FROM user WHERE user_email = :email), :idCode,"
                     " (SELECT idVehicle FROM machine WHERE state_number = :id))");
         qry.bindValue(":email", email);
         qry.bindValue(":id", ui->comboBox->currentText().split(" | ")[1]);
+        qry.bindValue(":idCode", idCode);
     }
-    qDebug() << qry.exec();
+    qry.exec();
     db.commit();
+    qDebug() << qry.lastError().text();
     on_pushButton_clicked();
 }
 
@@ -251,14 +266,31 @@ void MainWindow::on_pushButton_4_clicked()
     qry.prepare("UPDATE history SET date_finish = datetime() WHERE idBill = "
                 "(SELECT idBill FROM bill WHERE idUser = (SELECT idUser FROM user WHERE user_email = :email) AND billing_time is NULL)");
     qry.bindValue(":email", email);
-    //qry.exec();
-    qDebug() << qry.exec();
-    qDebug() << qry.lastError().text();
-    /*qry.prepare("UPDATE bill SET billing_time = date() WHERE idUser = (SELECT idUser FROM user WHERE user_email = :email) AND billing_time is NULL");
-    qry.bindValue(":email", email);
-    qry.exec();*/
+    qry.exec();
 
     db.commit();
     on_pushButton_clicked();
+}
+
+void MainWindow::reloadTable()
+{
+    QSqlQuery qry(db);
+
+    qry.prepare("SELECT trademark_name, color_name, ROUND(trademark_cost * (julianday(datetime()) - julianday(history.date_start)) * 24 * 60), ROUND((julianday(datetime()) - julianday(history.date_start)) * 24 * 60) FROM vehicle "
+                "INNER JOIN trademark ON vehicle.idTrademark = trademark.idTrademark "
+                "INNER JOIN color ON vehicle.idColor = color.idColor "
+                "INNER JOIN bill ON vehicle.idVehicle = bill.idVehicle "
+                "INNER JOIN history ON history.idBill = bill.idBill "
+                "INNER JOIN user ON user.idUser = bill.idUser "
+                "WHERE user.user_email = :email AND history.date_finish is NULL ");
+    qry.bindValue(":email", email);
+    qry.exec();
+    qry.first();
+
+    ui->tableWidget_3->setRowCount(1);
+    ui->tableWidget_3->setItem(0, 0, new QTableWidgetItem(qry.value(0).toString()));
+    ui->tableWidget_3->setItem(0, 1, new QTableWidgetItem(qry.value(1).toString()));
+    ui->tableWidget_3->setItem(0, 2, new QTableWidgetItem(qry.value(2).toString()));
+    ui->tableWidget_3->setItem(0, 3, new QTableWidgetItem(qry.value(3).toString() + " мин."));
 }
 

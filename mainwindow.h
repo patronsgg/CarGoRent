@@ -37,6 +37,7 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void reloadTable();
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
