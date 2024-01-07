@@ -24,6 +24,9 @@ FORMS += \
     mainwindow.ui \
     registrations.ui
 
+RESOURCES += qdarkstyle/dark/darkstyle.qrc
+RESOURCES += qdarkstyle/light/lightstyle.qrc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

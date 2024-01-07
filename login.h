@@ -17,6 +17,7 @@ public:
     explicit login(QSqlDatabase db, QWidget *parent = nullptr);
     ~login();
     QString returnEmail() { return email; }
+    int returnType() { return type; }
 
 private slots:
     void on_loginButton_clicked();
@@ -27,6 +28,7 @@ private:
     Ui::login *ui;
     QSqlDatabase db;
     QString email;
+    int type;
 };
 
 #endif // LOGIN_H

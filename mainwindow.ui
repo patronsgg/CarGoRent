@@ -215,6 +215,40 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="infoUser"/>
+      <widget class="QWidget" name="historyRepair">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QTableWidget" name="tableWidget_4">
+          <column>
+           <property name="text">
+            <string>Номер ремонта</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Дата заправки</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Стоимость</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Номер машины</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Почта рабочего</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
     <item>
@@ -230,6 +264,13 @@
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
          <string>История поездок</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>Пользователь</string>
         </property>
        </widget>
       </item>

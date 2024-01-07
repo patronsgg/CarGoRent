@@ -1,5 +1,6 @@
 #include "registrations.h"
 #include "ui_registrations.h"
+#include "QMessageBox"
 #include <QDebug>
 #include <QSqlError>
 
@@ -24,18 +25,25 @@ void registrations::on_pushButton_clicked()
 {
     QSqlQuery qry(db);
 
-    qry.prepare("INSERT INTO user (user_email, user_telephone, user_name, driver_license, password) "
-                "VALUES (:user_email, :user_telephone, :user_name, :driver_license, :password)");
+    qry.prepare("INSERT INTO user (user_email, user_telephone, user_name, driver_license, password, type) "
+                "VALUES (:user_email, :user_telephone, :user_name, :driver_license, :password, 0)");
     qry.bindValue(":user_email", ui->emailEdit->text());
     qry.bindValue(":user_telephone", ui->telephEdit->text());
     qry.bindValue(":user_name", ui->nameEdit->text());
     qry.bindValue(":driver_license", ui->licenseEdit->text());
     qry.bindValue(":password", ui->passEdit->text());
-    qry.exec();
+
+    if (qry.exec() == false) {
+        QMessageBox *error = new QMessageBox(this);
+        error->setWindowTitle("Ошибка");
+        error->setText("Неправильные данные");
+        error->setIcon(QMessageBox::Critical);
+        error->setStandardButtons(QMessageBox::Ok);
+        error->exec();
+        return;
+    }
 
     db.commit();
-
-
 
     accept();
 }

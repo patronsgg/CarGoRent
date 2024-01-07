@@ -38,9 +38,18 @@ private slots:
     void on_pushButton_4_clicked();
 
     void reloadTable();
+
+    void on_pushButton_5_clicked();
+
+    void loadPage();
+
+    void loadPageWorkerks();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
     QString email;
+    int typeAccount;
+    QTimer* timer;
 };
 #endif // MAINWINDOW_H

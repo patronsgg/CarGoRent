@@ -3,6 +3,7 @@
 #include "registrations.h"
 #include "mainwindow.h"
 #include <QSqlDatabase>
+#include "QMessageBox"
 #include <QDebug>
 
 login::login(QSqlDatabase db, QWidget *parent) :
@@ -26,11 +27,24 @@ void login::on_loginButton_clicked()
     qry.bindValue(":pass", ui->passwordEdit->text());
     qry.exec();
     qry.first();
-    qDebug() << qry.value(0).toInt();
     if (qry.value(0).toInt() == 1) {
         email = ui->loginEdit->text();
+        qry.prepare("SELECT type FROM user WHERE user_email = :login");
+        qry.bindValue(":login", ui->loginEdit->text());
+        qry.exec();
+        qry.first();
+        type = qry.value(0).toInt();
         accept();
+        return;
     }
+
+    QMessageBox *error = new QMessageBox(this);
+    error->setWindowTitle("Ошибка");
+    error->setText("Неправильные данные");
+    error->setIcon(QMessageBox::Critical);
+    error->setStandardButtons(QMessageBox::Ok);
+    error->exec();
+
 }
 
 
